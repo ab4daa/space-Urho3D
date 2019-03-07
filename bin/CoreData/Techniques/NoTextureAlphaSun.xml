@@ -1,0 +1,3 @@
+<technique vs="sun" ps="sun" vsdefines="NOUV" >
+    <pass name="sun"  depthwrite="false" blend="alphargb" />
+</technique>

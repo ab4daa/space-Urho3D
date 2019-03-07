@@ -1,0 +1,7 @@
+<renderpath>
+	<command type="clear" color="0 0 0 1" depth="1.0" stencil="0" />
+	<command type="scenepass" pass="point_stars" vertexlights="true" sort="backtofront" metadata="alpha" />
+	<command type="scenepass" pass="stars" vertexlights="true" sort="backtofront" metadata="alpha" />
+	<command type="scenepass" pass="nebula" vertexlights="true" sort="backtofront" metadata="alpha" />
+	<command type="scenepass" pass="sun" vertexlights="true" sort="backtofront" metadata="alpha" />
+</renderpath>

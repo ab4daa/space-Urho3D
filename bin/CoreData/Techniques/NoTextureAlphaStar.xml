@@ -1,0 +1,3 @@
+<technique vs="star" ps="star" vsdefines="NOUV" >
+    <pass name="stars"  depthwrite="false" blend="alphargb" />
+</technique>

@@ -1,0 +1,3 @@
+<technique vs="point_stars" ps="point_stars" vsdefines="NOUV" >
+    <pass name="point_stars"  depthwrite="false" blend="alphargb" />
+</technique>

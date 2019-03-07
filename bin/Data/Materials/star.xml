@@ -1,0 +1,4 @@
+<material>
+    <technique name="Techniques/NoTextureAlphaStar.xml" />
+    <cull value="none" />
+</material>
