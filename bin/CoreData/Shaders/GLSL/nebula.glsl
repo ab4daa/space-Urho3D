@@ -18,7 +18,7 @@ float noise(vec3 p) {
 float nebula(vec3 p) {
     const int steps = 6;
     float scale = pow(2.0, float(steps));
-    vec3 displace;
+    vec3 displace = vec3(0.0);
     for (int i = 0; i < steps; i++) {
         displace = vec3(
             noise(p.xyz * scale + displace),

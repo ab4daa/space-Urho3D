@@ -41,6 +41,12 @@ RenderToTexture::RenderToTexture(Context* context) :
 	SetRandomSeed(generate_random_seed());
 }
 
+void RenderToTexture::Setup()
+{
+	Sample::Setup();
+	engineParameters_[EP_LOG_NAME] = "Urho3D.log";
+}
+
 void RenderToTexture::Start()
 {
     // Execute base class startup

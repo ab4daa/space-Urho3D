@@ -45,6 +45,7 @@ public:
     /// Construct.
     explicit RenderToTexture(Context* context);
 
+	void Setup() override;
     /// Setup after engine initialization and before running the main loop.
     void Start() override;
 
