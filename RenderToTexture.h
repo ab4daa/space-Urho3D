@@ -62,6 +62,18 @@ private:
     void MoveCamera(float timeStep);
     /// Handle the logic update event.
     void HandleUpdate(StringHash eventType, VariantMap& eventData);
+	void HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData);
 
+	bool mouseFree{ false };
+	SharedPtr<Node> lightNode;
+	SharedPtr<UIElement> uielement_;
 	SharedPtr<SpaceBoxGen> gen;
+	void CreateCheckbox(const String& label, EventHandler* handler);
+	void GenerateClicked(StringHash eventType, VariantMap& eventData);
+	void SelectSize(StringHash eventType, VariantMap& eventData);
+	void Toggle_Point_Star(StringHash eventType, VariantMap& eventData);
+	void Toggle_Bright_Star(StringHash eventType, VariantMap& eventData);
+	void Toggle_Nebula(StringHash eventType, VariantMap& eventData);
+	void Toggle_Sun(StringHash eventType, VariantMap& eventData);
+	void ChangeLight(StringHash eventType, VariantMap& eventData);
 };

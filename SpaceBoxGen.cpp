@@ -266,8 +266,10 @@ namespace Urho3D
 			sun->SetTransform(Vector3::ZERO, Quaternion::IDENTITY);
 			StaticModel* sunObject = sun->CreateComponent<StaticModel>();
 			sunObject->SetModel(box);
-			sun_mat->SetShaderParameter("SunPosition", Vector3(Random(1.0f), Random(1.0f), Random(1.0f)));
-			sun_mat->SetShaderParameter("SunColor", Vector3(Random(1.0f), Random(1.0f), Random(1.0f)));
+			SunDirection = Vector3(Random(-1.0f, 1.0f), Random(-1.0f, 1.0f), Random(-1.0f, 1.0f));
+			SunColor = Color(Random(1.0f), Random(1.0f), Random(1.0f));
+			sun_mat->SetShaderParameter("SunPosition", SunDirection);
+			sun_mat->SetShaderParameter("SunColor", SunColor.ToVector3());
 			sun_mat->SetShaderParameter("SunSize", Random(1.0f) * 0.0001f + 0.0001f);
 			sun_mat->SetShaderParameter("SunFalloff", Random(1.0f) * 16 + 8);
 			sunObject->SetMaterial(sun_mat);
@@ -312,6 +314,16 @@ namespace Urho3D
 			v->SetRenderPath(cache->GetResource<XMLFile>("RenderPaths/SpaceBox.xml"));
 			s->SetNumViewports(1);
 			s->SetViewport(0, v);
+		}
+
+		/*notify sun position*/
+		{
+			using namespace SpaceBoxGenEvt;
+			VariantMap &data = GetEventDataMap();
+			data[P_SUN_ENABLE] = sun_enable;
+			data[P_SUN_DIR] = SunDirection;
+			data[P_SUN_COLOR] = SunColor;
+			SendEvent(E_SPACEBOXGEN, data);
 		}
 
 		/*auto destroy scene*/
