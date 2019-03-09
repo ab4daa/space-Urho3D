@@ -7,6 +7,9 @@ The green arrow is the direction of sun, the directional light in the scene will
 
 Note: It only works in OpenGL and D3D11, I don't know how to do the blend mode in D3D9.
 
+## Modify Urho3D
+To use it, one should add a blend mode for Urho3D, see files in engine_modification/
+
 ## Build sample
 Cmake as ordinary Urho3D project
 
