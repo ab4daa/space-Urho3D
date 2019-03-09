@@ -195,7 +195,7 @@ void RenderToTexture::CreateInstructions()
 
 	UIElement * uielement_g = uielement_->CreateChild<UIElement>();
 	uielement_g->SetAlignment(HA_LEFT, VA_TOP);
-	uielement_g->SetLayout(LM_HORIZONTAL, 5);
+	uielement_g->SetLayout(LM_HORIZONTAL, 8);
 
 	Button * g = uielement_g->CreateChild<Button>();
 	g->SetStyleAuto();
@@ -209,7 +209,7 @@ void RenderToTexture::CreateInstructions()
 
 	UIElement * uielement_cube = uielement_->CreateChild<UIElement>();
 	uielement_cube->SetAlignment(HA_LEFT, VA_TOP);
-	uielement_cube->SetLayout(LM_HORIZONTAL, 5);
+	uielement_cube->SetLayout(LM_HORIZONTAL, 8);
 
 	Text * tCubeSize = uielement_cube->CreateChild<Text>();
 	tCubeSize->SetText("TextureCube Size:");
@@ -237,6 +237,27 @@ void RenderToTexture::CreateInstructions()
 	CreateCheckbox(String("bright stars"), URHO3D_HANDLER(RenderToTexture, Toggle_Bright_Star));
 	CreateCheckbox(String("nebula"), URHO3D_HANDLER(RenderToTexture, Toggle_Nebula));
 	CreateCheckbox(String("sun"), URHO3D_HANDLER(RenderToTexture, Toggle_Sun));
+
+	UIElement * uielement_fov = uielement_->CreateChild<UIElement>();
+	uielement_fov->SetAlignment(HA_LEFT, VA_TOP);
+	uielement_fov->SetLayout(LM_HORIZONTAL, 8);
+
+	Text * tFOV = uielement_fov->CreateChild<Text>();
+	tFOV->SetText("FOV:");
+	tFOV->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 12);
+
+	auto* fovSlider = uielement_fov->CreateChild<Slider>();
+	fovSlider->SetStyleAuto();
+	fovSlider->SetRange(140.0f);
+	Camera * c = cameraNode_->GetComponent<Camera>();
+	fovSlider->SetValue(c->GetFov() - 10.0f);
+	fovSlider->SetMinWidth(150);
+
+	tValue = uielement_fov->CreateChild<Text>();
+	tValue->SetText(String(Round(c->GetFov())));
+	tValue->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 12);
+
+	SubscribeToEvent(fovSlider, E_SLIDERCHANGED, URHO3D_HANDLER(RenderToTexture, fovSlided));
 }
 
 void RenderToTexture::SetupViewport()
@@ -401,3 +422,10 @@ void RenderToTexture::ChangeLight(StringHash eventType, VariantMap& eventData)
 	}
 }
 
+void RenderToTexture::fovSlided(StringHash eventType, VariantMap& eventData)
+{
+	float newValue = eventData[SliderChanged::P_VALUE].GetFloat();
+	Camera * c = cameraNode_->GetComponent<Camera>();
+	c->SetFov(newValue + 10.0f);
+	tValue->SetText(String(Round(newValue + 10.0f)));
+}

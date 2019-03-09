@@ -68,6 +68,7 @@ private:
 	SharedPtr<Node> lightNode;
 	SharedPtr<UIElement> uielement_;
 	SharedPtr<SpaceBoxGen> gen;
+	SharedPtr<Text> tValue;
 	void CreateCheckbox(const String& label, EventHandler* handler);
 	void GenerateClicked(StringHash eventType, VariantMap& eventData);
 	void SelectSize(StringHash eventType, VariantMap& eventData);
@@ -76,4 +77,5 @@ private:
 	void Toggle_Nebula(StringHash eventType, VariantMap& eventData);
 	void Toggle_Sun(StringHash eventType, VariantMap& eventData);
 	void ChangeLight(StringHash eventType, VariantMap& eventData);
+	void fovSlided(StringHash eventType, VariantMap& eventData);
 };
