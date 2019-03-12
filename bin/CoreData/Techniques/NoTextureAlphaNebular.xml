@@ -1,3 +1,3 @@
-<technique vs="nebula" ps="nebula" vsdefines="NOUV" >
+<technique vs="nebula" ps="nebula">
     <pass name="nebula"  depthwrite="false" blend="alphargb" />
 </technique>

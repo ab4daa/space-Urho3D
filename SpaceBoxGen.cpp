@@ -141,6 +141,12 @@ namespace Urho3D
 			Vector3(1, -1, -1),
 			Vector3(-1, -1, -1)
 		};
+		vertex_data testd[boxVertexNum];
+		for (unsigned ii = 0; ii < boxVertexNum; ++ii)
+		{
+			testd[ii].position = vertexes[ii];
+			testd[ii].color = Color::WHITE.ToUInt();
+		}
 		unsigned short indexData[boxVertexNum];
 		for (unsigned ii = 0; ii < boxVertexNum; ++ii)
 			indexData[ii] = ii;
@@ -156,8 +162,9 @@ namespace Urho3D
 		// defining the vertex elements explicitly to allow any element types and order
 		PODVector<VertexElement> elements;
 		elements.Push(VertexElement(TYPE_VECTOR3, SEM_POSITION));
+		elements.Push(VertexElement(TYPE_UBYTE4_NORM, SEM_COLOR));
 		vb->SetSize(boxVertexNum, elements);
-		vb->SetData(vertexes);
+		vb->SetData(testd);
 
 		ib->SetShadowed(true);
 		ib->SetSize(boxVertexNum, false);
@@ -304,7 +311,8 @@ namespace Urho3D
 			CameraNodes[ii]->LookAt(dir[ii], up[ii]);
 		}
 
-		assert(SpaceCube->SetSize(cubeSize, Graphics::GetRGBAFormat(), TEXTURE_RENDERTARGET));
+		if(SpaceCube->SetSize(cubeSize, Graphics::GetRGBAFormat(), TEXTURE_RENDERTARGET) == false)
+			URHO3D_LOGERROR(String("SpaceCube->SetSize fail: cubeSize=") + String(cubeSize));
 		for (unsigned ii = 0; ii < MAX_CUBEMAP_FACES; ++ii)
 		{
 			RenderSurface* s = SpaceCube->GetRenderSurface((CubeMapFace)ii);
