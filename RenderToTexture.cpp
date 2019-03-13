@@ -222,12 +222,12 @@ void RenderToTexture::CreateInstructions()
 	const int Sizes[5] = { 256,512,1024,2048,4096 };
 	for (int i = 0; i < 5; ++i)
 	{
-		Text * item = cubeSizeList->CreateChild<Text>();
+		Text * item = ui->GetRoot()->CreateChild<Text>();
 		item->SetStyle("EditorEnumAttributeText");
 		item->SetText(String(Sizes[i]));
 		item->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 12);
-		item->SetAlignment(HA_CENTER, VA_CENTER);
 		item->SetVar(TEXTURECUBE_SIZE, Sizes[i]);
+		item->SetMinWidth(50);
 		cubeSizeList->AddItem(item);
 	}
 	cubeSizeList->SetSelection(2);

@@ -41,7 +41,6 @@
 #endif
 
 void VS(float4 iPos : POSITION,
-    float4 iColor : COLOR0,    
     out float3 vPos : TEXCOORD0,    
     out float4 oPos : OUTPOSITION)
 {
